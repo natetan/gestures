@@ -19,51 +19,81 @@ public class MainActivity extends ActionBarActivity  implements GestureDetector.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        mMessageTextView = (TextView) findViewById(R.id.messageTextView);
+        mGestureDetector = new GestureDetectorCompat(this, this);
+        mGestureDetector.setOnDoubleTapListener(this);
+
     }
+
+    /*
+        Begin Gestures
+    */
 
     @Override
     public boolean onSingleTapConfirmed(MotionEvent e) {
-        return false;
+        this.setMessage("onSingleTapConfirmed");
+        return true;
     }
 
     @Override
     public boolean onDoubleTap(MotionEvent e) {
-        return false;
+        this.setMessage("onDoubleTap");
+        return true;
     }
 
     @Override
     public boolean onDoubleTapEvent(MotionEvent e) {
-        return false;
+        this.setMessage("onDoubleTapEvent");
+        return true;
     }
 
     @Override
     public boolean onDown(MotionEvent e) {
-        return false;
+        this.setMessage("onDown");
+        return true;
     }
 
     @Override
     public void onShowPress(MotionEvent e) {
-
+        this.setMessage("onShowPress");
     }
 
     @Override
     public boolean onSingleTapUp(MotionEvent e) {
-        return false;
+        this.setMessage("onSingleTapUp");
+        return true;
     }
 
     @Override
     public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
-        return false;
+        this.setMessage("onScroll");
+        return true;
     }
 
     @Override
     public void onLongPress(MotionEvent e) {
-
+        this.setMessage("onLongPress");
     }
 
     @Override
     public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-        return false;
+        this.setMessage("onFling");
+        return true;
+    }
+
+    private void setMessage(String message) {
+        mMessageTextView.setText(message);
+    }
+
+    /*
+        End Gestures
+    */
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        mGestureDetector.onTouchEvent(event); // Detects if it was a special kind of event first
+        return super.onTouchEvent(event);
     }
 
     @Override
