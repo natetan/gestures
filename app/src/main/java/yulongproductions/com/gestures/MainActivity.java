@@ -7,6 +7,8 @@ import android.view.GestureDetector;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 
@@ -14,6 +16,7 @@ public class MainActivity extends ActionBarActivity  implements GestureDetector.
                                                                 GestureDetector.OnDoubleTapListener {
     private TextView mMessageTextView;
     private GestureDetectorCompat mGestureDetector;
+    private Button mTapButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,8 +24,16 @@ public class MainActivity extends ActionBarActivity  implements GestureDetector.
         setContentView(R.layout.activity_main);
 
         mMessageTextView = (TextView) findViewById(R.id.messageTextView);
+        mTapButton = (Button) findViewById(R.id.tapButton);
         mGestureDetector = new GestureDetectorCompat(this, this);
         mGestureDetector.setOnDoubleTapListener(this);
+
+        mTapButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MainActivity.this.setMessage("You just clicked on the button!");
+            }
+        });
 
     }
 
@@ -67,7 +78,7 @@ public class MainActivity extends ActionBarActivity  implements GestureDetector.
 
     @Override
     public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
-        this.setMessage("onScroll");
+        this.setMessage("You're scrolling!");
         return true;
     }
 
@@ -78,7 +89,7 @@ public class MainActivity extends ActionBarActivity  implements GestureDetector.
 
     @Override
     public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-        this.setMessage("onFling");
+        this.setMessage("You're flinging!s");
         return true;
     }
 
